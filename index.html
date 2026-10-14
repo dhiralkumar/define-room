@@ -21,11 +21,7 @@
 <meta name="twitter:title" content="Define Room | SEO, Social Media &amp; Website Studio in India">
 <meta name="twitter:description" content="SEO, viral reels, design, websites, tracking and AI automation run as one system. Get a free website audit in 48 hours.">
 <link rel="alternate" type="text/markdown" href="llms.txt" title="Define Room summary for AI assistants">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" href="fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -552,6 +548,10 @@
 </script>
 
 <style>
+/* Fonts are self-hosted (latin subset) so text renders without waiting on another server. */
+@font-face{font-family:"Urbanist";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/urbanist-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"DM Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/dm-mono-latin-400.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"DM Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/dm-mono-latin-500.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 /* Layout: Atacama-style white rounded canvas on a mist frame; sections follow the funnel wireframe
    Hero > proof bar > pain/benefit grid > services > process > pricing > testimonials + FAQ > lead form.
    Deliberately single (light) theme: the brand is lime-on-white. */
@@ -660,8 +660,8 @@ nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(
 @media (max-width:700px){.proof .label{max-width:none}}
 .marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .track{display:flex;gap:42px;width:max-content;animation:slide 38s linear infinite}
-.marquee:hover .track{animation-play-state:paused}
-.track span{font-size:1.35rem;font-weight:600;color:#9a9d97;white-space:nowrap;letter-spacing:-.01em}
+.marquee:hover .track,.marquee.off .track{animation-play-state:paused}
+.track span{font-size:1.35rem;font-weight:600;color:#6b6e68;white-space:nowrap;letter-spacing:-.01em}
 @keyframes slide{to{transform:translateX(-50%)}}
 
 /* sections */
@@ -798,7 +798,7 @@ footer{padding-block:44px 30px}
 .foot{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:30px}
 @media (max-width:900px){.foot{grid-template-columns:repeat(2,minmax(0,1fr))}.foot>div:first-child{grid-column:1/-1}}
 @media (max-width:700px){body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
-.foot h4{margin:0 0 10px;font-family:var(--mono);font-weight:400;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.foot h2{margin:0 0 10px;font-family:var(--mono);font-weight:400;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
 .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .foot a{text-decoration:none}.foot a:hover{text-decoration:underline}
 .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-2)}
@@ -828,7 +828,7 @@ footer{padding-block:44px 30px}
       <a href="#why">Why us</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a>
     </div>
     <div class="nav-end">
-      <a class="btn dark" href="#audit"><span class="t">Free audit</span><span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn dark" href="#audit" aria-label="Free audit"><span class="t">Free audit</span><span class="arr" aria-hidden="true">→</span></a>
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span></button>
     </div>
   </div>
@@ -1055,7 +1055,7 @@ footer{padding-block:44px 30px}
       </ul>
       <p style="font-size:.95rem">Prefer email? Write to <a href="mailto:dhiralkumar2002@gmail.com"><b>dhiralkumar2002@gmail.com</b></a></p>
     </div>
-    <form id="leadForm" novalidate>
+    <form id="leadForm" novalidate toolname="request_free_website_audit" tooldescription="Request a free website audit from Define Room, a digital marketing studio in India. Sends the visitor's name, email, optional website or Instagram handle, and main need. A person must complete the I am human check before it can be sent.">
       <div class="row2">
         <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required minlength="2" maxlength="60" placeholder="Priya Sharma" aria-describedby="e-name"><span class="ferr" id="e-name" hidden></span></div>
         <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="100" placeholder="you@business.com" aria-describedby="e-email"><span class="ferr" id="e-email" hidden></span><button type="button" class="suggest" id="s-email" hidden></button></div>
@@ -1065,7 +1065,7 @@ footer{padding-block:44px 30px}
         <select id="f-need" name="need">
           <option>Not sure yet, audit me</option><option>More reach on social media</option><option>Ranking on Google (SEO)</option><option>A new or better website</option><option>Video editing</option><option>Graphic design</option><option>AI automation</option><option>Tracking and analytics</option>
         </select></div>
-      <div class="captcha-wrap" id="captchaWrap"><div class="h-captcha" data-captcha="true"></div></div>
+      <div class="captcha-wrap" id="captchaWrap"><div class="h-captcha" id="hcaptchaBox"></div></div>
       <p class="testnote" id="testNote" hidden>Test mode: this page is open from your computer, so the "I am human" check is switched off and nothing is sent. Upload the site and the form will work there.</p>
       <p class="err" id="formErr" hidden role="alert"></p>
       <label class="hp" aria-hidden="true">Leave this empty<input type="checkbox" name="botcheck" id="f-botcheck" tabindex="-1" autocomplete="off"></label>
@@ -1095,8 +1095,8 @@ footer{padding-block:44px 30px}
       </a>
       <p style="color:var(--ink-2);max-width:36ch">SEO, content, design, websites, video, tracking and AI automation. One studio, one plan, measurable growth.</p>
     </div>
-    <div><h4>Services</h4><ul><li><a href="#services">SEO</a></li><li><a href="#services">Social media content</a></li><li><a href="#services">Websites</a></li><li><a href="#services">AI automation</a></li></ul></div>
-    <div><h4>Contact</h4><ul><li style="overflow-wrap:anywhere"><a href="mailto:dhiralkumar2002@gmail.com">dhiralkumar2002@gmail.com</a></li><li><a href="#audit">Free website audit</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+    <div><h2>Services</h2><ul><li><a href="#services">SEO</a></li><li><a href="#services">Social media content</a></li><li><a href="#services">Websites</a></li><li><a href="#services">AI automation</a></li></ul></div>
+    <div><h2>Contact</h2><ul><li style="overflow-wrap:anywhere"><a href="mailto:dhiralkumar2002@gmail.com">dhiralkumar2002@gmail.com</a></li><li><a href="#audit">Free website audit</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></div>
   </div>
   <div class="legal"><span>© <span id="yr">2026</span> Define Room. All rights reserved.</span><span>Prices in INR, excluding GST.</span></div>
 </footer>
@@ -1116,11 +1116,13 @@ footer{padding-block:44px 30px}
 
   // Hero canvas: rising growth curve with soft grid
   var cv=document.getElementById('growth');
+  // The canvas size comes from a ResizeObserver, so drawing never forces a layout.
+  var cw=0,ch=0,progress=0;
+  function setSize(w,h){var dpr=window.devicePixelRatio||1;cw=w;ch=h;cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);}
   function draw(t){
-    var r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
-    if(!r.width) return;
-    cv.width=r.width*dpr;cv.height=r.height*dpr;var c=cv.getContext('2d');c.scale(dpr,dpr);
-    var w=r.width,h=r.height;c.clearRect(0,0,w,h);
+    if(!cw) return;
+    var dpr=window.devicePixelRatio||1,c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);
+    var w=cw,h=ch;c.clearRect(0,0,w,h);
     c.strokeStyle='rgba(255,255,255,.06)';c.lineWidth=1;
     for(var x=0;x<w;x+=40){c.beginPath();c.moveTo(x,0);c.lineTo(x,h);c.stroke();}
     for(var y=0;y<h;y+=40){c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();}
@@ -1132,8 +1134,13 @@ footer{padding-block:44px 30px}
     c.beginPath();pts.forEach(function(q,i){i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]);});c.strokeStyle='#e3f25c';c.lineWidth=2.5;c.stroke();
     var e=pts[pts.length-1];c.beginPath();c.arc(e[0],e[1],6,0,7);c.fillStyle='#e3f25c';c.fill();
   }
-  if(reduce){draw(1);}else{var s=null;(function step(ts){if(s===null)s=ts;var t=(ts-s)/1600;draw(t);if(t<1)requestAnimationFrame(step);})(performance.now());}
-  window.addEventListener('resize',function(){draw(1);});
+  if('ResizeObserver' in window){new ResizeObserver(function(es){var b=es[0].contentRect;setSize(b.width,b.height);draw(progress);}).observe(cv);}
+  else{requestAnimationFrame(function(){var r=cv.getBoundingClientRect();setSize(r.width,r.height);draw(progress);});}
+  if(reduce){progress=1;draw(1);}else{var s=null;requestAnimationFrame(function step(ts){if(s===null)s=ts;progress=Math.min(1,(ts-s)/1600);draw(progress);if(progress<1)requestAnimationFrame(step);});}
+
+  // Pause the tools marquee while it is off screen.
+  var mq=document.querySelector('.marquee');
+  if(mq&&'IntersectionObserver' in window){new IntersectionObserver(function(es){mq.classList.toggle('off',!es[0].isIntersecting);}).observe(mq);}
 
   // Services hover preview (Atacama-style tilted card)
   var icons={
@@ -1161,8 +1168,13 @@ footer{padding-block:44px 30px}
 
   // Sticky mobile CTA after the hero, hidden near the form
   var sticky=document.getElementById('stickyCta'),hero=document.getElementById('top'),audit=document.getElementById('audit');
-  function onScroll(){var y=window.scrollY,hb=hero.offsetTop+hero.offsetHeight,at=audit.getBoundingClientRect().top;sticky.classList.toggle('show',y>hb&&at>window.innerHeight*0.6);}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  // IntersectionObservers instead of scroll math, so scrolling never forces a layout.
+  var heroGone=false,auditNear=false;
+  function setSticky(){sticky.classList.toggle('show',heroGone&&!auditNear);}
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){var e=es[0];heroGone=!e.isIntersecting&&e.boundingClientRect.bottom<=0;setSticky();}).observe(hero);
+    new IntersectionObserver(function(es){var e=es[0];auditNear=e.isIntersecting||e.boundingClientRect.bottom<=0;setSticky();},{rootMargin:'0px 0px -40% 0px'}).observe(audit);
+  }
 
   // Lead form: Web3Forms (https://web3forms.com) with layered bot protection:
   // honeypots, minimum fill time, strict validation, hCaptcha, and a per-browser rate limit.
@@ -1174,6 +1186,18 @@ footer{padding-block:44px 30px}
   var pageStart=Date.now(),formStart=0;
   var LOCAL=location.protocol==='file:'||/^(localhost|127\.|0\.0\.0\.0|\[::1\])/.test(location.hostname);
   if(LOCAL){document.getElementById('captchaWrap').hidden=true;document.getElementById('testNote').hidden=false;}
+  // hCaptcha (Web3Forms' free-plan site key) loads only when the visitor nears the form,
+  // so the first page load carries no third-party scripts.
+  var HCAPTCHA_SITEKEY='50b2fe65-b00b-4b9e-ad62-3ba471098be2',capState=0;
+  window.onHcaptchaLoad=function(){try{window.hcaptcha.render('hcaptchaBox',{sitekey:HCAPTCHA_SITEKEY});capState=2;}catch(_){capState=3;}};
+  function loadCaptcha(){
+    if(LOCAL||capState) return;capState=1;
+    var s=document.createElement('script');s.src='https://js.hcaptcha.com/1/api.js?render=explicit&onload=onHcaptchaLoad&recaptchacompat=off';s.async=true;
+    s.onerror=function(){capState=3;};document.head.appendChild(s);
+  }
+  if('IntersectionObserver' in window){var capIO=new IntersectionObserver(function(es){if(es[0].isIntersecting){loadCaptcha();capIO.disconnect();}},{rootMargin:'800px 0px'});capIO.observe(form);}else{loadCaptcha();}
+  form.addEventListener('focusin',loadCaptcha);
+  document.querySelectorAll('a[href="#audit"]').forEach(function(a){a.addEventListener('click',loadCaptcha);});
   form.addEventListener('focusin',function(){if(!formStart)formStart=Date.now();});
   var DISPOSABLE=['mailinator.com','yopmail.com','guerrillamail.com','10minutemail.com','tempmail.com','temp-mail.org','trashmail.com','sharklasers.com','getnada.com','dispostable.com','maildrop.cc','fakeinbox.com','throwawaymail.com','mintemail.com','emailondeck.com','moakt.com','tempail.com','mohmal.com','burnermail.io','spamgourmet.com'];
   var URLISH=/(https?:\/\/|www\.|\.(com|net|org|ru|xyz|top|io|in)\b|<|>|\[url|\bhref\b)/i;
@@ -1270,8 +1294,9 @@ footer{padding-block:44px 30px}
     var hist=recent(),now=Date.now(),last=Math.max(lastSubmit,hist.length?hist[hist.length-1]:0);
     if(now-last<COOLDOWN_MS){formErr('You just sent a request. Please wait a minute before sending another.');return;}
     if(hist.length>=MAX_PER_HOUR){formErr('You\'ve sent several requests already. We\'ll be in touch, or email us directly.');return;}
-    // hCaptcha (loaded by the Web3Forms client script).
+    // hCaptcha (loaded on demand above).
     var capField=form.querySelector('textarea[name="h-captcha-response"]');
+    if(capState<2&&!capField&&capState!==3){loadCaptcha();formErr('The "I am human" check is still loading. Tick it when it appears, then send again.');return;}
     if(!window.hcaptcha&&!capField){formErr('The security check didn\'t load. Refresh the page, or email us directly.');fail.hidden=false;return;}
     var token=capField?capField.value:'';
     if(!token){formErr('Please tick the "I am human" check above.');return;}
@@ -1306,7 +1331,6 @@ footer{padding-block:44px 30px}
   });
 })();
 </script>
-<script src="https://web3forms.com/client/script.js" async defer></script>
 
 </body>
 </html>

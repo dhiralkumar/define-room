@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ebebe8">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Define Room</title>
+<meta name="description" content="Define Room is a digital marketing studio for SEO, viral social content, design, websites, video editing, tracking and AI automation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Atacama-style white rounded canvas on a mist frame; sections follow the funnel wireframe
+   Hero > proof bar > pain/benefit grid > services > process > pricing > testimonials + FAQ > lead form.
+   Deliberately single (light) theme: the brand is lime-on-white. */
+:root{
+  --frame:#ebebe8; --canvas:#ffffff; --soft:#f4f4f1; --ink:#16181a; --ink-2:#4a4f53; --line:#e2e3df;
+  --lime:#e3f25c; --lime-deep:#cfe03a; --clay:#b8805a; --glacier:#9fc4d6;
+  --display:"Urbanist","Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --r-xl:32px; --r-lg:24px; --r-md:16px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{background:var(--frame);color:var(--ink);font-family:var(--display);font-size:17px;line-height:1.55;
+  padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-block:12px 12px}
+@media (min-width:700px){body{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:20px}}
+.canvas{max-width:1320px;margin:0 auto;background:var(--canvas);border-radius:var(--r-xl);overflow:clip}
+@media (max-width:560px){:root{--r-xl:24px;--r-lg:20px}}
+.in{padding-inline:clamp(16px,4vw,48px)}
+h1,h2,h3{margin:0;font-weight:500;line-height:1.06;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:8px}
+.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;padding:5px 12px;border:1px solid var(--line);border-radius:99px;background:var(--canvas);white-space:nowrap}
+.chip.lime{background:var(--lime);border-color:var(--lime)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ink)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 1rem var(--display);padding:14px 22px;border-radius:99px;border:1px solid var(--ink);text-decoration:none;cursor:pointer;transition:transform .2s ease,background .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.light{background:var(--canvas);color:var(--ink);border-color:var(--line)}
+.btn .arr{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--lime);color:var(--ink);margin-right:-10px;transition:transform .2s}
+.btn:hover .arr{transform:rotate(-45deg)}
+.btn.light .arr{background:var(--ink);color:#fff}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.nav-links{display:flex;gap:6px}
+.nav-links a{font-size:.9rem;text-decoration:none;padding:8px 14px;border-radius:99px;background:var(--soft)}
+.nav-links a:hover{background:var(--lime)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:1.3rem;letter-spacing:-.02em}
+.brand b{font-weight:700}.brand span{font-weight:400}
+.brand svg{width:38px;height:38px;flex:none}
+.nav .btn{padding:10px 18px;font-size:.92rem}
+.nav-end{display:flex;align-items:center;gap:8px}
+.menu-btn{display:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--soft);cursor:pointer;padding:0;place-content:center;gap:5px}
+.menu-btn span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s}
+.menu-btn[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.mobile-menu{display:grid;gap:6px;padding-block:4px 16px}
+.mobile-menu a{font-size:1.15rem;font-weight:500;text-decoration:none;padding:14px 18px;border-radius:16px;background:var(--soft)}
+.mobile-menu a:active{background:var(--lime)}
+@media (min-width:901px){.mobile-menu{display:none!important}}
+@media (max-width:900px){.nav-links{display:none}.menu-btn{display:grid}}
+@media (max-width:480px){.nav .btn .t{display:none}.nav .btn{padding:0;width:46px;height:46px;justify-content:center}.nav .btn .arr{margin:0}.brand{font-size:1.15rem}.brand svg{width:34px;height:34px}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:14px;padding-block:6px 14px}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}}
+.hero-copy{min-width:0;background:var(--lime);border-radius:var(--r-xl);padding:clamp(28px,5vw,64px);display:grid;gap:26px;align-content:center}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4.6rem)}
+.hero h1 u{text-decoration-thickness:3px;text-underline-offset:8px}
+.hero .sub{font-size:clamp(1.05rem,1.4vw,1.2rem);max-width:52ch;color:#2b2f17}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px}
+.micro{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:.92rem}
+.avatars{display:flex}
+.avatars i{width:34px;height:34px;border-radius:50%;border:2px solid var(--lime);margin-left:-9px;display:block}
+.avatars i:first-child{margin-left:0}
+.hero-visual{position:relative;border-radius:var(--r-xl);background:var(--ink);color:#fff;min-height:440px;overflow:hidden;padding:clamp(22px,3vw,34px);display:grid;align-content:space-between;gap:24px}
+.hero-visual canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+.hv-top,.hv-bottom{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.stat-card{background:#fff;color:var(--ink);border-radius:var(--r-lg);padding:16px 18px;display:grid;gap:2px;min-width:180px}
+.stat-card strong{font-size:2.6rem;font-weight:600;letter-spacing:-.03em;line-height:1}
+.stat-card small{font-size:.85rem;color:var(--ink-2)}
+.float-chips{position:relative;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.float-chips .chip{background:rgba(22,24,26,.6);color:#fff;border-color:rgba(255,255,255,.35);backdrop-filter:blur(6px)}
+.float-chips .chip .dot{background:var(--lime)}
+.hv-bottom p{max-width:30ch;font-size:.95rem;color:#d7dad6}
+.reel-row{display:flex;gap:8px}
+.reel{width:56px;height:96px;border-radius:14px;background:linear-gradient(160deg,var(--glacier),#3d6d82);position:relative;display:grid;place-items:center}
+.reel:nth-child(2){background:linear-gradient(160deg,#e3b893,var(--clay))}
+.reel:nth-child(3){background:linear-gradient(160deg,var(--lime),#8fa21f)}
+@media (max-width:900px){.hero-visual{min-height:360px}}
+@media (max-width:560px){
+  .hero-visual{min-height:0;padding:20px;gap:20px}
+  .hv-top{flex-direction:column;align-items:stretch}
+  .stat-card{min-width:0}
+  .float-chips{flex-direction:row;flex-wrap:wrap;align-items:flex-start;justify-content:flex-start;gap:8px}
+  .hv-bottom{flex-direction:column;align-items:flex-start}
+  .reel{width:48px;height:82px}
+  .cta-row .btn{width:100%;justify-content:space-between}
+  .hero-copy{gap:22px;padding:28px 22px}
+  .hero-copy .chip{white-space:normal;font-size:.75rem}
+}
+.reel::after{content:"";border-left:12px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}
+
+/* proof bar */
+.proof{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center;padding-block:26px;border-block:1px solid var(--line)}
+@media (max-width:700px){.proof{grid-template-columns:minmax(0,1fr);gap:14px;padding-block:20px}.proof .label{max-width:none}.track span{font-size:1.1rem}}
+.proof .label{max-width:18ch}
+@media (max-width:700px){.proof .label{max-width:none}}
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:42px;width:max-content;animation:slide 38s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{font-size:1.35rem;font-weight:600;color:#9a9d97;white-space:nowrap;letter-spacing:-.01em}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+section.block{padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:end;margin-bottom:44px}
+@media (max-width:800px){.sec-head{grid-template-columns:minmax(0,1fr);gap:14px;margin-bottom:28px}}
+@media (max-width:560px){section.block{padding-block:56px}.pain,.step,.quote{padding:22px}}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3.4rem)}
+.sec-head p{color:var(--ink-2);max-width:46ch}
+
+/* pains */
+.pains{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.pains{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.pains{grid-template-columns:minmax(0,1fr)}}
+.pain{background:var(--soft);border-radius:var(--r-lg);padding:26px;display:grid;gap:14px;align-content:start;transition:background .25s}
+.pain:hover{background:var(--lime)}
+.pain .ico{width:48px;height:48px;border-radius:14px;background:var(--canvas);display:grid;place-items:center}
+.pain .ico svg{width:24px;height:24px}
+.pain .q{font-size:1.2rem;font-weight:600;line-height:1.25}
+.pain .fix{color:var(--ink-2);font-size:.98rem}
+.pain .fix b{color:var(--ink);font-weight:600}
+
+/* services list with hover preview */
+.svc-wrap{position:relative}
+.svc-head,.svc{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.4fr) minmax(0,.7fr) 44px;gap:18px;align-items:center}
+.svc-head{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.svc{padding-block:22px;border-bottom:1px solid var(--line);position:relative;cursor:default}
+.svc h3{font-size:clamp(1.25rem,2vw,1.6rem)}
+.svc .tags{display:flex;flex-wrap:wrap;gap:6px}
+.svc .price{font-family:var(--mono);font-size:.9rem}
+.svc .go{width:40px;height:40px;border-radius:50%;background:var(--soft);display:grid;place-items:center;transition:background .2s,transform .2s;text-decoration:none}
+.svc:hover .go{background:var(--lime);transform:rotate(-45deg)}
+.svc:hover h3{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.preview{position:absolute;right:12%;width:220px;height:150px;border-radius:20px;pointer-events:none;opacity:0;transform:rotate(-6deg) scale(.9);transition:opacity .2s,transform .25s,top .25s;display:grid;place-items:center;box-shadow:12px 12px 0 var(--lime);z-index:2}
+.preview.on{opacity:1;transform:rotate(-6deg) scale(1)}
+.preview svg{width:64px;height:64px}
+@media (max-width:800px){.svc-head{display:none}.svc{grid-template-columns:minmax(0,1fr) auto;row-gap:10px;padding-block:18px}.svc .price{font-size:.82rem;background:var(--soft);padding:5px 10px;border-radius:99px;white-space:nowrap}.svc .tags{grid-column:1/-1;grid-row:2}.svc .go{display:none}.preview{display:none}}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
+@media (max-width:800px){.steps{grid-template-columns:minmax(0,1fr)}}
+.step{border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;display:grid;gap:12px;align-content:start}
+.step .n{font-family:var(--mono);font-size:.8rem;width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center}
+.step h3{font-size:1.35rem;font-weight:600}
+.step p{color:var(--ink-2)}
+.step .when{font-family:var(--mono);font-size:.75rem;color:var(--ink-2)}
+
+/* pricing */
+.dark-band{background:var(--ink);color:#fff;border-radius:var(--r-xl);margin-inline:clamp(8px,1.2vw,14px)}
+.dark-band .sec-head p,.dark-band .label{color:#b8bcb7}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}
+@media (max-width:960px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}.tier.pick{grid-column:1/-1;order:-1}}
+@media (max-width:640px){.tiers{grid-template-columns:minmax(0,1fr)}.tier{padding:24px}.dark-band{margin-inline:0;border-radius:24px}}
+.tier{background:#212427;border-radius:var(--r-lg);padding:28px;display:grid;gap:20px;align-content:start;position:relative}
+.tier.pick{background:var(--lime);color:var(--ink)}
+.tier .tname{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tier .tname h3{font-size:1.5rem;font-weight:600}
+.tier .badge{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:var(--ink);color:var(--lime)}
+.tier .for{font-size:.95rem;opacity:.8}
+.amount{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+.amount strong{font-size:clamp(2.4rem,4vw,3.2rem);font-weight:600;letter-spacing:-.03em;line-height:1}
+.amount span{font-size:.95rem;opacity:.75}
+.tier ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.97rem}
+.tier li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px}
+.tier li::before{content:"";width:16px;height:16px;margin-top:4px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%2316181a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.tier.pick li::before{background-color:var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23e3f25c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.tier .btn{justify-content:space-between;width:100%}
+.tier:not(.pick) .btn{background:#fff;color:var(--ink);border-color:#fff}
+.tier.pick .btn{background:var(--ink);color:#fff}
+.price-note{margin-top:22px;font-size:.88rem;color:#b8bcb7;display:flex;flex-wrap:wrap;gap:8px 22px}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.quotes{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(280px,78%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;margin-inline:calc(-1 * clamp(16px,4vw,48px));padding-inline:clamp(16px,4vw,48px);scroll-padding-inline:clamp(16px,4vw,48px);scrollbar-width:none}.quotes::-webkit-scrollbar{display:none}.quote{scroll-snap-align:start}}
+.quote{background:var(--soft);border-radius:var(--r-lg);padding:26px;display:grid;gap:18px;align-content:space-between}
+.quote .obj{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.quote blockquote{margin:0;font-size:1.18rem;line-height:1.4;font-weight:500}
+.quote .who{display:flex;align-items:center;gap:12px;font-size:.9rem}
+.quote .who i{width:40px;height:40px;border-radius:50%;display:block;flex:none}
+.quote .who small{display:block;color:var(--ink-2)}
+.sample{font-family:var(--mono);font-size:.68rem;padding:3px 8px;border-radius:99px;border:1px dashed var(--ink-2);color:var(--ink-2);justify-self:start}
+.feature-proof{margin-top:14px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;background:var(--lime);border-radius:var(--r-lg);padding:26px 30px}
+.feature-proof strong{font-size:clamp(2.6rem,5vw,4rem);font-weight:600;letter-spacing:-.04em;line-height:1}
+@media (max-width:700px){.feature-proof{grid-template-columns:minmax(0,1fr);gap:14px;padding:24px}.feature-proof .btn{justify-content:space-between}}
+
+/* faq */
+.faq{display:grid;gap:0;border-top:1px solid var(--line);margin-top:48px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:20px;font-size:1.15rem;font-weight:600}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:34px;height:34px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:400;font-size:1.3rem;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg);background:var(--lime)}
+@media (max-width:560px){.faq summary{font-size:1.02rem;padding-block:18px}}
+.faq details p{padding-bottom:22px;color:var(--ink-2);max-width:68ch}
+
+/* lead form */
+.lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:900px){.lead{grid-template-columns:minmax(0,1fr)}}
+.lead-copy{background:var(--lime);border-radius:var(--r-xl);padding:clamp(28px,4vw,52px);display:grid;gap:28px;align-content:center}
+.lead-copy h2{font-size:clamp(2.2rem,4.6vw,3.8rem)}
+.gets{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.gets li{display:flex;gap:10px;align-items:flex-start}
+.gets li::before{content:"→";font-weight:700}
+form{background:var(--soft);border-radius:var(--r-xl);padding:clamp(24px,4vw,44px);display:grid;gap:16px;align-content:start}
+.field{display:grid;gap:6px}
+.field label{font-size:.88rem;font-weight:600}
+.field input,.field select,.field textarea{font:inherit;font-size:1rem;padding:14px 18px;border-radius:16px;border:1px solid var(--line);background:#fff;color:var(--ink);width:100%}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--ink);outline-offset:1px}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:520px){.row2{grid-template-columns:minmax(0,1fr)}}
+form .btn{justify-content:space-between;width:100%;font-size:1.05rem;padding:16px 24px}
+.fine{font-size:.82rem;color:var(--ink-2)}
+.err{color:#a2271b;font-size:.85rem}
+.done{display:grid;gap:10px;background:#fff;border-radius:18px;padding:20px;border-left:6px solid var(--lime-deep)}
+.done.bad{border-left-color:#a2271b}
+.hp{position:absolute!important;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0}
+.ferr{color:#a2271b;font-size:.82rem}
+.suggest{justify-self:start;font:inherit;font-size:.85rem;background:var(--lime);color:var(--ink);border:0;border-radius:99px;padding:6px 12px;cursor:pointer;text-align:left}
+.suggest b{font-weight:700}
+.testnote{font-size:.85rem;background:#fff;border:1px dashed var(--ink-2);border-radius:14px;padding:12px 14px;color:var(--ink-2)}
+.testnote.loud{font-size:.95rem;background:#fff4cc;border:2px solid #c99a00;color:var(--ink)}
+.testnote.loud b{display:block;margin-bottom:4px}
+.field input[aria-invalid="true"]{border-color:#a2271b;outline-color:#a2271b}
+.captcha-wrap{min-height:0;max-width:100%;overflow-x:auto}
+.captcha-wrap:has(iframe){min-height:78px}
+form{position:relative}
+#submitBtn[disabled]{opacity:.7;cursor:progress;transform:none}
+.mailrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mailrow code{font-family:var(--mono);font-size:.9rem;background:var(--soft);padding:8px 12px;border-radius:10px;user-select:all;word-break:break-all}
+
+/* footer */
+footer{padding-block:44px 30px}
+.foot{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:30px}
+@media (max-width:900px){.foot{grid-template-columns:repeat(2,minmax(0,1fr))}.foot>div:first-child{grid-column:1/-1}}
+@media (max-width:700px){body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+.foot h4{margin:0 0 10px;font-family:var(--mono);font-weight:400;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot a{text-decoration:none}.foot a:hover{text-decoration:underline}
+.legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-2)}
+
+/* mobile sticky CTA */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));display:none;transform:translateY(110%);transition:transform .3s}
+.sticky-cta.show{transform:none}
+.sticky-cta .btn{width:100%;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+@media (max-width:700px){.sticky-cta{display:block}}
+
+/* entrance */
+.rise{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.rise.d2{animation-delay:.12s}.rise.d3{animation-delay:.24s}
+@keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+</style>
+
+</head>
+<body>
+<div class="canvas">
+<nav aria-label="Main">
+  <div class="nav in">
+    <a class="brand" href="#top" aria-label="Define Room home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#e3f25c"/><g fill="none" stroke="#16181a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 26V16H26"/><path d="M38 16H48V26"/><path d="M48 38V48H38"/><path d="M26 48H16V38"/></g><rect x="27" y="27" width="10" height="10" rx="2.5" fill="#16181a"/></svg>
+      <span><b>define</b> <span>room</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#why">Why us</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-end">
+      <a class="btn dark" href="#audit"><span class="t">Free audit</span><span class="arr" aria-hidden="true">→</span></a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu in" id="mobileMenu" hidden>
+    <a href="#why">Why us</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#results">Results</a><a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<header class="in" id="top">
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="chip" style="justify-self:start"><span class="dot"></span>Digital marketing studio · India &amp; remote</span>
+      <h1 class="rise">Get found, get followed, get <u>booked</u>.</h1>
+      <p class="sub rise d2">Define Room runs your SEO, scroll-stopping content, design, website, video and tracking as one system, with AI automations doing the busywork. You get more enquiries without hiring five freelancers.</p>
+      <div class="cta-row rise d3">
+        <a class="btn dark" href="#audit">Get my free website audit <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn light" href="#pricing">See pricing <span class="arr" aria-hidden="true">↓</span></a>
+      </div>
+      <div class="micro">
+        <div class="avatars" aria-hidden="true"><i style="background:#16181a"></i><i style="background:#b8805a"></i><i style="background:#9fc4d6"></i></div>
+        <span><b>1.8M+ Instagram views</b> from content we've made. Audit report in 48 hours, no card needed.</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="Highlights">
+      <canvas id="growth" aria-hidden="true"></canvas>
+      <div class="hv-top">
+        <div class="stat-card"><span class="label">Instagram views</span><strong>1.8M+</strong><small>earned with organic reels</small></div>
+        <div class="float-chips">
+          <span class="chip"><span class="dot"></span>SEO</span>
+          <span class="chip"><span class="dot"></span>Viral reels</span>
+          <span class="chip"><span class="dot"></span>AI automation</span>
+          <span class="chip"><span class="dot"></span>Tracking</span>
+        </div>
+      </div>
+      <div class="hv-bottom">
+        <div class="reel-row" aria-hidden="true"><span class="reel"></span><span class="reel"></span><span class="reel"></span></div>
+        <p>One team for content, search, design and data, so every post, page and ad points at the same goal.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="in">
+  <div class="proof">
+    <span class="label">Built and measured with the tools serious teams use</span>
+    <div class="marquee" aria-label="Tools we work with">
+      <div class="track">
+        <span>Google Search Console</span><span>GA4</span><span>Google Tag Manager</span><span>Meta Ads Manager</span><span>Instagram</span><span>Figma</span><span>Webflow</span><span>WordPress</span><span>n8n</span><span>Make</span><span>Premiere Pro</span><span>CapCut</span>
+        <span aria-hidden="true">Google Search Console</span><span aria-hidden="true">GA4</span><span aria-hidden="true">Google Tag Manager</span><span aria-hidden="true">Meta Ads Manager</span><span aria-hidden="true">Instagram</span><span aria-hidden="true">Figma</span><span aria-hidden="true">Webflow</span><span aria-hidden="true">WordPress</span><span aria-hidden="true">n8n</span><span aria-hidden="true">Make</span><span aria-hidden="true">Premiere Pro</span><span aria-hidden="true">CapCut</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="block in" id="why">
+  <div class="sec-head">
+    <h2>Sound familiar? Each of these has a fix.</h2>
+    <p>Most businesses don't have a marketing problem. They have six small leaks. We find them in the audit and close them one by one.</p>
+  </div>
+  <div class="pains">
+    <article class="pain">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#16181a" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 9.5v5l4-2.5z" fill="#16181a"/></svg></div>
+      <p class="q">"We post every week and nobody watches."</p>
+      <p class="fix"><b>Viral-first content.</b> Hooks, scripts and edits built on what earned 1.8M+ views, planned around what your buyers actually search and share.</p>
+    </article>
+    <article class="pain">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#16181a" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></div>
+      <p class="q">"Customers can't find us on Google."</p>
+      <p class="fix"><b>SEO that compounds.</b> Technical fixes, local SEO and content clusters that keep bringing traffic after we stop typing.</p>
+    </article>
+    <article class="pain">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#16181a" stroke-width="1.8" stroke-linecap="round"><rect x="2.5" y="4" width="19" height="14" rx="2.5"/><path d="M8 21h8M2.5 8h19"/></svg></div>
+      <p class="q">"The website gets visits, not enquiries."</p>
+      <p class="fix"><b>Conversion-built websites.</b> Fast pages with one clear action each, rebuilt from a full audit of what's leaking.</p>
+    </article>
+    <article class="pain">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#16181a" stroke-width="1.8" stroke-linecap="round"><path d="M3 20h18"/><path d="M6 16v-4M11 16V7M16 16v-6M21 16V4"/></svg></div>
+      <p class="q">"We have no idea what's working."</p>
+      <p class="fix"><b>Tracking you can read.</b> GA4, Tag Manager and Meta pixel set up properly, with a one-page monthly report in plain language.</p>
+    </article>
+    <article class="pain">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#16181a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+      <p class="q">"Follow-ups and reports eat our whole week."</p>
+      <p class="fix"><b>AI automation.</b> Lead routing, auto-replies, content repurposing and reporting run on their own, so your team sells instead of copy-pasting.</p>
+    </article>
+    <article class="pain">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#16181a" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18M3.5 9h17M3.5 15h17"/></svg></div>
+      <p class="q">"Our brand looks DIY next to competitors."</p>
+      <p class="fix"><b>Graphic design.</b> A consistent look across logo, posts, ads and pages, so people trust you before they've read a word.</p>
+    </article>
+  </div>
+</section>
+
+<section class="block in" id="services" style="padding-top:0">
+  <div class="sec-head">
+    <h2>Everything your growth needs, under one roof.</h2>
+    <p>Take one service or combine them in a monthly plan. Prices are starting points; your audit tells you exactly what you need.</p>
+  </div>
+  <div class="svc-wrap" id="svcWrap">
+    <div class="svc-head label"><span>Service</span><span>Includes</span><span>From</span><span></span></div>
+    <div class="svc" data-c="#9fc4d6" data-i="search"><h3>SEO</h3><div class="tags"><span class="chip">Technical audit</span><span class="chip">Local SEO</span><span class="chip">Content</span></div><span class="price">₹12,999/mo</span><a class="go" href="#audit" aria-label="Ask about SEO">→</a></div>
+    <div class="svc" data-c="#e3f25c" data-i="play"><h3>Social media content</h3><div class="tags"><span class="chip lime">Viral reels</span><span class="chip">Scripts &amp; hooks</span><span class="chip">Posting plan</span></div><span class="price">₹17,999/mo</span><a class="go" href="#audit" aria-label="Ask about social media content">→</a></div>
+    <div class="svc" data-c="#b8805a" data-i="cut"><h3>Video editing</h3><div class="tags"><span class="chip">Reels &amp; shorts</span><span class="chip">YouTube</span><span class="chip">Captions</span></div><span class="price">₹1,499/reel</span><a class="go" href="#audit" aria-label="Ask about video editing">→</a></div>
+    <div class="svc" data-c="#16181a" data-i="pen"><h3>Graphic design</h3><div class="tags"><span class="chip">Logo &amp; brand kit</span><span class="chip">Ad creatives</span><span class="chip">Post templates</span></div><span class="price">₹7,999</span><a class="go" href="#audit" aria-label="Ask about graphic design">→</a></div>
+    <div class="svc" data-c="#9fc4d6" data-i="web"><h3>Website design &amp; build</h3><div class="tags"><span class="chip">Landing pages</span><span class="chip">Business sites</span><span class="chip">Webflow / WordPress</span></div><span class="price">₹24,999</span><a class="go" href="#audit" aria-label="Ask about websites">→</a></div>
+    <div class="svc" data-c="#e3f25c" data-i="bolt"><h3>AI automation workflows</h3><div class="tags"><span class="chip lime">n8n / Make</span><span class="chip">Lead routing</span><span class="chip">AI replies</span></div><span class="price">₹9,999/workflow</span><a class="go" href="#audit" aria-label="Ask about AI automation">→</a></div>
+    <div class="svc" data-c="#b8805a" data-i="chart"><h3>Tracking &amp; analytics</h3><div class="tags"><span class="chip">GA4</span><span class="chip">Tag Manager</span><span class="chip">Meta pixel</span></div><span class="price">₹7,999</span><a class="go" href="#audit" aria-label="Ask about tracking">→</a></div>
+    <div class="svc" data-c="#16181a" data-i="check"><h3>Website audit</h3><div class="tags"><span class="chip">Speed</span><span class="chip">SEO</span><span class="chip">Conversion</span><span class="chip lime">Free first audit</span></div><span class="price">₹4,999</span><a class="go" href="#audit" aria-label="Ask about a website audit">→</a></div>
+    <div class="preview" id="preview" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="block in" style="padding-top:0">
+  <div class="sec-head">
+    <h2>From audit to results in three steps.</h2>
+    <p>No long discovery phase. You see a plan before you spend a rupee.</p>
+  </div>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><span class="when">Within 48 hours</span><h3>Free audit</h3><p>We review your website, Google presence and social channels and send a short report of the biggest leaks.</p></div>
+    <div class="step"><span class="n">2</span><span class="when">Week 1</span><h3>30-day plan</h3><p>A call to agree goals, then a plan that says what we'll ship, when, and which number it should move.</p></div>
+    <div class="step"><span class="n">3</span><span class="when">Every month</span><h3>Ship and report</h3><p>Content, pages and automations go live on schedule. A plain-language report shows what worked and what's next.</p></div>
+  </div>
+</section>
+
+<section class="block dark-band" id="pricing">
+  <div class="in">
+    <div class="sec-head">
+      <h2>Monthly plans. No lock-in.</h2>
+      <p>Priced at Indian market rates for agency-quality work. Month to month, cancel with 30 days' notice. All prices exclude GST and ad spend.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tname"><h3>Starter</h3></div>
+        <p class="for">For new or local businesses that need to show up consistently.</p>
+        <div class="amount"><strong>₹14,999</strong><span>/month</span></div>
+        <ul>
+          <li>8 designed posts + 4 edited reels</li>
+          <li>Google Business Profile and on-page SEO basics</li>
+          <li>GA4 + Meta pixel set up</li>
+          <li>Monthly one-page report</li>
+        </ul>
+        <a class="btn" href="#audit">Start with Starter <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      <div class="tier pick">
+        <div class="tname"><h3>Growth</h3><span class="badge">Most chosen</span></div>
+        <p class="for">For businesses ready to turn attention into steady enquiries.</p>
+        <div class="amount"><strong>₹34,999</strong><span>/month</span></div>
+        <ul>
+          <li>12 viral-format reels with scripts and hooks + 8 posts</li>
+          <li>Ongoing SEO: technical fixes + 2 blog articles</li>
+          <li>Full tracking with Tag Manager and conversion events</li>
+          <li>1 AI automation workflow (e.g. lead follow-up)</li>
+          <li>Landing page updates and quarterly website audit</li>
+        </ul>
+        <a class="btn" href="#audit">Choose Growth <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      <div class="tier">
+        <div class="tname"><h3>Scale</h3></div>
+        <p class="for">For brands that want one team running their whole digital presence.</p>
+        <div class="amount"><strong>₹69,999</strong><span>/month</span></div>
+        <ul>
+          <li>20 reels + 12 posts, with shoot direction</li>
+          <li>SEO content cluster: 4 articles + link building</li>
+          <li>Up to 3 automation workflows, maintained</li>
+          <li>Ongoing website design and development</li>
+          <li>Weekly check-in and priority support</li>
+        </ul>
+        <a class="btn" href="#audit">Talk about Scale <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="price-note"><span>Need one thing only? Every service above is also available on its own.</span><span>Working outside India? We quote in USD.</span></div>
+  </div>
+</section>
+
+<section class="block in" id="results">
+  <div class="sec-head">
+    <h2>What clients worry about before hiring us.</h2>
+    <p>Real questions, answered by the people who asked them.</p>
+  </div>
+  <div class="quotes">
+    <figure class="quote" style="margin:0">
+      <span class="obj">"Will it actually bring customers?"</span>
+      <blockquote>"Within two months our reels were reaching people outside our city, and the enquiry form finally started getting used."</blockquote>
+      <figcaption class="who"><i style="background:#9fc4d6"></i><span>Client name<small>Business, city</small></span></figcaption>
+      <span class="sample">Sample: replace with a real client quote</span>
+    </figure>
+    <figure class="quote" style="margin:0">
+      <span class="obj">"Agencies vanish after the invoice."</span>
+      <blockquote>"Every month we got a one-page report that I could read in five minutes. I always knew what was done and why."</blockquote>
+      <figcaption class="who"><i style="background:#b8805a"></i><span>Client name<small>Business, city</small></span></figcaption>
+      <span class="sample">Sample: replace with a real client quote</span>
+    </figure>
+    <figure class="quote" style="margin:0">
+      <span class="obj">"We can't afford five freelancers."</span>
+      <blockquote>"Design, content, website and tracking from one place cost us less than the two freelancers we had before."</blockquote>
+      <figcaption class="who"><i style="background:#e3f25c"></i><span>Client name<small>Business, city</small></span></figcaption>
+      <span class="sample">Sample: replace with a real client quote</span>
+    </figure>
+  </div>
+  <div class="feature-proof">
+    <strong>1.8M+</strong>
+    <p>Views earned on Instagram from content made by Define Room. The same hooks, editing and posting system goes into your plan.</p>
+    <a class="btn dark" href="#audit">Get the same playbook <span class="arr" aria-hidden="true">→</span></a>
+  </div>
+
+  <div class="faq" id="faq">
+    <details><summary>How long before I see results?</summary><p>Content and tracking improvements show within the first month. SEO usually takes three to six months to build steady traffic, which is why we pair it with content that works now.</p></details>
+    <details><summary>Do I have to sign a long contract?</summary><p>No. Plans run month to month and you can cancel with 30 days' notice. You keep everything we create for you.</p></details>
+    <details><summary>Is ad spend included in the price?</summary><p>No. Plan prices cover our work. Ad budgets are paid directly to Meta or Google from your own account, so you always control them.</p></details>
+    <details><summary>What's in the free website audit?</summary><p>A short report covering speed, SEO basics, tracking and the main reasons visitors aren't enquiring, with the three fixes we'd make first. It's yours to keep whether or not you hire us.</p></details>
+    <details><summary>Can you work with businesses outside India?</summary><p>Yes. We work remotely with clients anywhere and can quote in USD.</p></details>
+  </div>
+</section>
+
+<section class="block in" id="audit" style="padding-top:0">
+  <div class="lead">
+    <div class="lead-copy">
+      <h2>Get your free website audit.</h2>
+      <ul class="gets">
+        <li>Speed, SEO and tracking check</li>
+        <li>The three fixes that would bring the most enquiries</li>
+        <li>A suggested plan and price, no obligation</li>
+      </ul>
+      <p style="font-size:.95rem">Prefer email? Write to <b>dhiralkumar2002@gmail.com</b></p>
+    </div>
+    <form id="leadForm" novalidate>
+      <div class="row2">
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required minlength="2" maxlength="60" placeholder="Priya Sharma" aria-describedby="e-name"><span class="ferr" id="e-name" hidden></span></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="100" placeholder="you@business.com" aria-describedby="e-email"><span class="ferr" id="e-email" hidden></span><button type="button" class="suggest" id="s-email" hidden></button></div>
+      </div>
+      <div class="field"><label for="f-site">Website or Instagram <span style="font-weight:400;color:var(--ink-2)">(optional, leave blank if you don't have one)</span></label><input id="f-site" name="site" maxlength="120" placeholder="yourbusiness.com, @yourhandle or instagram.com/you" aria-describedby="e-site"><span class="ferr" id="e-site" hidden></span></div>
+      <div class="field"><label for="f-need">What do you need most?</label>
+        <select id="f-need" name="need">
+          <option>Not sure yet, audit me</option><option>More reach on social media</option><option>Ranking on Google (SEO)</option><option>A new or better website</option><option>Video editing</option><option>Graphic design</option><option>AI automation</option><option>Tracking and analytics</option>
+        </select></div>
+      <div class="captcha-wrap" id="captchaWrap"><div class="h-captcha" data-captcha="true"></div></div>
+      <p class="testnote" id="testNote" hidden>Test mode: this page is open from your computer, so the "I am human" check is switched off and nothing is sent. Upload the site and the form will work there.</p>
+      <p class="err" id="formErr" hidden role="alert"></p>
+      <label class="hp" aria-hidden="true">Leave this empty<input type="checkbox" name="botcheck" id="f-botcheck" tabindex="-1" autocomplete="off"></label>
+      <label class="hp" aria-hidden="true">Company fax<input type="text" name="fax" id="f-fax" tabindex="-1" autocomplete="off"></label>
+      <button class="btn dark" type="submit" id="submitBtn"><span id="submitLabel">Send me the audit</span> <span class="arr" aria-hidden="true">→</span></button>
+      <p class="fine" id="formFine">Takes 30 seconds. We reply within one working day and never share your details.</p>
+      <div class="done ok" id="formOk" hidden role="status">
+        <b>Thanks, your audit request is in.</b>
+        <span class="fine">We'll email your report within one working day. Check your spam folder if you don't see it.</span>
+      </div>
+      <div class="done bad" id="formFail" hidden role="alert">
+        <b>Your request didn't go through.</b>
+        <span class="fine">Please try again in a moment, or email us your details directly:</span>
+        <div class="mailrow"><code id="mailAddr">dhiralkumar2002@gmail.com</code><button type="button" class="btn light" id="copyBtn" style="padding:8px 16px">Copy</button></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="in">
+  <div class="foot">
+    <div style="display:grid;gap:14px;align-content:start">
+      <a class="brand" href="#top" aria-label="Define Room home">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#e3f25c"/><g fill="none" stroke="#16181a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 26V16H26"/><path d="M38 16H48V26"/><path d="M48 38V48H38"/><path d="M26 48H16V38"/></g><rect x="27" y="27" width="10" height="10" rx="2.5" fill="#16181a"/></svg>
+        <span><b>define</b> <span>room</span></span>
+      </a>
+      <p style="color:var(--ink-2);max-width:36ch">SEO, content, design, websites, video, tracking and AI automation. One studio, one plan, measurable growth.</p>
+    </div>
+    <div><h4>Services</h4><ul><li><a href="#services">SEO</a></li><li><a href="#services">Social media content</a></li><li><a href="#services">Websites</a></li><li><a href="#services">AI automation</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li style="overflow-wrap:anywhere">dhiralkumar2002@gmail.com</li><li><a href="#audit">Free website audit</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+  </div>
+  <div class="legal"><span>© <span id="yr">2026</span> Define Room. All rights reserved.</span><span>Prices in INR, excluding GST.</span></div>
+</footer>
+</div>
+
+<div class="sticky-cta" id="stickyCta"><a class="btn dark" href="#audit">Get my free website audit <span class="arr" aria-hidden="true">→</span></a></div>
+
+<script>
+(function(){
+  var mb=document.getElementById('menuBtn'),mm=document.getElementById('mobileMenu');
+  function setMenu(open){mm.hidden=!open;mb.setAttribute('aria-expanded',open?'true':'false');mb.setAttribute('aria-label',open?'Close menu':'Open menu');}
+  mb.addEventListener('click',function(){setMenu(mm.hidden);});
+  mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false);});
+  var yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero canvas: rising growth curve with soft grid
+  var cv=document.getElementById('growth');
+  function draw(t){
+    var r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+    if(!r.width) return;
+    cv.width=r.width*dpr;cv.height=r.height*dpr;var c=cv.getContext('2d');c.scale(dpr,dpr);
+    var w=r.width,h=r.height;c.clearRect(0,0,w,h);
+    c.strokeStyle='rgba(255,255,255,.06)';c.lineWidth=1;
+    for(var x=0;x<w;x+=40){c.beginPath();c.moveTo(x,0);c.lineTo(x,h);c.stroke();}
+    for(var y=0;y<h;y+=40){c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();}
+    var pts=[],n=60,p=Math.min(1,t);
+    for(var i=0;i<=n*p;i++){var u=i/n;var yy=h*0.82-Math.pow(u,2.2)*h*0.5-Math.sin(u*14)*8*(1-u);pts.push([u*w,yy]);}
+    if(pts.length<2) return;
+    var g=c.createLinearGradient(0,h*0.3,0,h);g.addColorStop(0,'rgba(227,242,92,.28)');g.addColorStop(1,'rgba(227,242,92,0)');
+    c.beginPath();c.moveTo(pts[0][0],h);pts.forEach(function(q){c.lineTo(q[0],q[1]);});c.lineTo(pts[pts.length-1][0],h);c.closePath();c.fillStyle=g;c.fill();
+    c.beginPath();pts.forEach(function(q,i){i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]);});c.strokeStyle='#e3f25c';c.lineWidth=2.5;c.stroke();
+    var e=pts[pts.length-1];c.beginPath();c.arc(e[0],e[1],6,0,7);c.fillStyle='#e3f25c';c.fill();
+  }
+  if(reduce){draw(1);}else{var s=null;(function step(ts){if(s===null)s=ts;var t=(ts-s)/1600;draw(t);if(t<1)requestAnimationFrame(step);})(performance.now());}
+  window.addEventListener('resize',function(){draw(1);});
+
+  // Services hover preview (Atacama-style tilted card)
+  var icons={
+    search:'<circle cx="28" cy="28" r="16"/><path d="M40 40l14 14"/>',
+    play:'<rect x="18" y="6" width="28" height="52" rx="7"/><path d="M28 24v16l12-8z" fill="currentColor"/>',
+    cut:'<circle cx="18" cy="46" r="7"/><circle cx="46" cy="46" r="7"/><path d="M23 41L48 10M41 41L16 10"/>',
+    pen:'<path d="M12 52l8-2 30-30-6-6-30 30z"/><path d="M38 14l6 6"/>',
+    web:'<rect x="6" y="12" width="52" height="40" rx="6"/><path d="M6 22h52"/>',
+    bolt:'<path d="M36 6L14 36h16l-4 22 22-30H32z"/>',
+    chart:'<path d="M8 56h48M16 46V34M28 46V22M40 46V30M52 46V12"/>',
+    check:'<circle cx="32" cy="32" r="24"/><path d="M21 33l7 7 15-16"/>'
+  };
+  var wrap=document.getElementById('svcWrap'),pv=document.getElementById('preview');
+  if(wrap&&pv&&window.matchMedia('(hover:hover)').matches){
+    wrap.querySelectorAll('.svc').forEach(function(row){
+      row.addEventListener('mouseenter',function(){
+        var bg=row.dataset.c,dark=(bg==='#16181a');
+        pv.style.background=bg;pv.style.color=dark?'#e3f25c':'#16181a';
+        pv.innerHTML='<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">'+icons[row.dataset.i]+'</svg>';
+        pv.style.top=(row.offsetTop+row.offsetHeight/2-75)+'px';pv.classList.add('on');
+      });
+    });
+    wrap.addEventListener('mouseleave',function(){pv.classList.remove('on');});
+  }
+
+  // Sticky mobile CTA after the hero, hidden near the form
+  var sticky=document.getElementById('stickyCta'),hero=document.getElementById('top'),audit=document.getElementById('audit');
+  function onScroll(){var y=window.scrollY,hb=hero.offsetTop+hero.offsetHeight,at=audit.getBoundingClientRect().top;sticky.classList.toggle('show',y>hb&&at>window.innerHeight*0.6);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Lead form: Web3Forms (https://web3forms.com) with layered bot protection:
+  // honeypots, minimum fill time, strict validation, hCaptcha, and a per-browser rate limit.
+  var WEB3FORMS_KEY='49f1b8cd-ee28-4cf1-9c5f-3068f63d8092';
+  var MIN_FILL_MS=4000, COOLDOWN_MS=60000, MAX_PER_HOUR=3, RL_KEY='dr_lead_submits';
+  var form=document.getElementById('leadForm'),err=document.getElementById('formErr'),ok=document.getElementById('formOk'),fail=document.getElementById('formFail');
+  var btn=document.getElementById('submitBtn'),lbl=document.getElementById('submitLabel');
+  var fN=document.getElementById('f-name'),fE=document.getElementById('f-email'),fS=document.getElementById('f-site');
+  var pageStart=Date.now(),formStart=0;
+  var LOCAL=location.protocol==='file:'||/^(localhost|127\.|0\.0\.0\.0|\[::1\])/.test(location.hostname);
+  if(LOCAL){document.getElementById('captchaWrap').hidden=true;document.getElementById('testNote').hidden=false;}
+  form.addEventListener('focusin',function(){if(!formStart)formStart=Date.now();});
+  var DISPOSABLE=['mailinator.com','yopmail.com','guerrillamail.com','10minutemail.com','tempmail.com','temp-mail.org','trashmail.com','sharklasers.com','getnada.com','dispostable.com','maildrop.cc','fakeinbox.com','throwawaymail.com','mintemail.com','emailondeck.com','moakt.com','tempail.com','mohmal.com','burnermail.io','spamgourmet.com'];
+  var URLISH=/(https?:\/\/|www\.|\.(com|net|org|ru|xyz|top|io|in)\b|<|>|\[url|\bhref\b)/i;
+  function gibberish(t){
+    var w=t.toLowerCase().replace(/[^a-z]/g,'');
+    if(w.length<2) return false;
+    if(!/[aeiouy]/.test(w)) return true;
+    if(/[bcdfghjklmnpqrstvwxz]{5,}/.test(w)) return true;
+    if(/(.)\1{3,}/.test(w)) return true;
+    return false;
+  }
+  function checkName(v){
+    if(v.length<2) return 'Please enter your name.';
+    if(v.length>60) return 'Please keep your name under 60 characters.';
+    if(URLISH.test(v)) return 'Names can\'t contain links.';
+    if(!/^[\p{L}][\p{L} .'\-]*$/u.test(v)) return 'Use letters only, please.';
+    if(gibberish(v)) return 'That doesn\'t look like a real name.';
+    return '';
+  }
+  function checkEmail(v){
+    if(!v) return 'Please enter your email.';
+    if(!/^[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}$/.test(v)||/\.\./.test(v)) return 'Please enter a valid email, like you@business.com.';
+    var dom=v.split('@')[1].toLowerCase();
+    if(DISPOSABLE.some(function(d){return dom===d||dom.endsWith('.'+d);})) return 'Please use a permanent email address.';
+    if(suggestEmail(v)) return 'That email domain looks misspelled.';
+    return '';
+  }
+  // Optional and forgiving: accepts a website, an @handle, an Instagram link, an email or a short note.
+  function checkSite(v){
+    if(!v) return '';
+    if(/[<>{}\[\]]/.test(v)) return 'Please remove special characters like < > [ ].';
+    if((v.match(/https?:\/\//gi)||[]).length>1) return 'Please add just one link.';
+    if(v.length>120) return 'Please keep this under 120 characters.';
+    return '';
+  }
+  // "Did you mean gmail.com?" for common email domain typos.
+  var KNOWN=['gmail.com','yahoo.com','yahoo.co.in','outlook.com','hotmail.com','icloud.com','rediffmail.com','live.com','protonmail.com','proton.me','ymail.com','aol.com','zoho.com'];
+  function lev(a,b){var m=a.length,n=b.length,d=[],i,j;for(i=0;i<=m;i++){d[i]=[i];}for(j=0;j<=n;j++){d[0][j]=j;}
+    for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
+  function suggestEmail(v){
+    var at=v.lastIndexOf('@');if(at<1)return '';
+    var local=v.slice(0,at),dom=v.slice(at+1).toLowerCase();
+    if(!dom||KNOWN.indexOf(dom)>-1)return '';
+    var best='',bd=3;
+    KNOWN.forEach(function(k){var d=lev(dom,k);if(d<bd){bd=d;best=k;}});
+    if(best&&bd<=2&&dom.length>=5)return local+'@'+best;
+    var fixed=dom.replace(/\.(con|cmo|conm|comm|cpm|vom|xom|cm|cim)$/,'.com');
+    if(fixed!==dom)return local+'@'+fixed;
+    return '';
+  }
+  var sE=document.getElementById('s-email');
+  function updateSuggest(){
+    var sug=suggestEmail(fE.value.trim());
+    if(sug&&sE.dataset.v===sug&&!sE.hidden)return sug;
+    if(sug){sE.innerHTML='';sE.appendChild(document.createTextNode('Did you mean '));var bb=document.createElement('b');bb.textContent=sug;sE.appendChild(bb);sE.appendChild(document.createTextNode('? Tap to fix'));sE.dataset.v=sug;sE.hidden=false;}
+    else{sE.hidden=true;sE.dataset.v='';}
+    return sug;
+  }
+  sE.addEventListener('mousedown',function(e){e.preventDefault();});
+  sE.addEventListener('click',function(){fE.value=sE.dataset.v;sE.hidden=true;show(fE,checkEmail(fE.value.trim()));fE.focus();});
+  fE.addEventListener('blur',updateSuggest);
+  function show(input,msg){
+    var e=document.getElementById(input.getAttribute('aria-describedby'));
+    e.textContent=msg;e.hidden=!msg;input.setAttribute('aria-invalid',msg?'true':'false');return !msg;
+  }
+  [[fN,checkName],[fE,checkEmail],[fS,checkSite]].forEach(function(pair){
+    pair[0].addEventListener('blur',function(){if(pair[0].value.trim())show(pair[0],pair[1](pair[0].value.trim()));});
+    pair[0].addEventListener('input',function(){if(pair[0].getAttribute('aria-invalid')==='true')show(pair[0],pair[1](pair[0].value.trim()));});
+  });
+  function recent(){try{var a=JSON.parse(localStorage.getItem(RL_KEY)||'[]');var now=Date.now();return a.filter(function(t){return now-t<3600000;});}catch(_){return [];}}
+  function remember(){try{var a=recent();a.push(Date.now());localStorage.setItem(RL_KEY,JSON.stringify(a));}catch(_){}}
+  var lastSubmit=0;
+  function formErr(msg){err.textContent=msg;err.hidden=!msg;}
+  function fakeSuccess(){ok.hidden=false;form.reset();}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    ok.hidden=true;fail.hidden=true;formErr('');
+    var name=fN.value.trim().replace(/\s+/g,' '),email=fE.value.trim(),site=fS.value.trim();
+    updateSuggest();
+    var v1=show(fN,checkName(name)),v2=show(fE,checkEmail(email)),v3=show(fS,checkSite(site));
+    if(!(v1&&v2&&v3)){(!v1?fN:!v2?fE:fS).focus();return;}
+    if(LOCAL){
+      var tn=document.getElementById('testNote');
+      tn.innerHTML='<b>Not sent: test mode.</b>This page is open from your computer, so nothing goes to Gmail. All your fields passed. Upload the site (for example to Netlify) and the form will send real requests.';
+      tn.classList.add('loud');tn.hidden=false;tn.scrollIntoView({block:'center',behavior:'smooth'});
+      lbl.textContent='Test mode: not sent';setTimeout(function(){lbl.textContent='Send me the audit';},3500);
+      return;
+    }
+    // Bots: honeypots filled or form completed faster than a person could. Pretend it worked.
+    if(document.getElementById('f-botcheck').checked||document.getElementById('f-fax').value){fakeSuccess();return;}
+    // Measured from page load, so browser autofill + one click still counts as a person.
+    if(Date.now()-pageStart<MIN_FILL_MS){fakeSuccess();return;}
+    // Rate limit per browser.
+    var hist=recent(),now=Date.now(),last=Math.max(lastSubmit,hist.length?hist[hist.length-1]:0);
+    if(now-last<COOLDOWN_MS){formErr('You just sent a request. Please wait a minute before sending another.');return;}
+    if(hist.length>=MAX_PER_HOUR){formErr('You\'ve sent several requests already. We\'ll be in touch, or email us directly.');return;}
+    // hCaptcha (loaded by the Web3Forms client script).
+    var capField=form.querySelector('textarea[name="h-captcha-response"]');
+    if(!window.hcaptcha&&!capField){formErr('The security check didn\'t load. Refresh the page, or email us directly.');fail.hidden=false;return;}
+    var token=capField?capField.value:'';
+    if(!token){formErr('Please tick the "I am human" check above.');return;}
+    btn.disabled=true;lbl.textContent='Sending…';lastSubmit=now;
+    var payload={
+      access_key:WEB3FORMS_KEY,
+      subject:'New Define room lead',
+      from_name:'Define Room website',
+      name:name,email:email,replyto:email,
+      website_or_instagram:site||'(not given)',
+      needs:document.getElementById('f-need').value,
+      'h-captcha-response':token,
+      botcheck:false
+    };
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json().then(function(j){if(!r.ok||!j.success)throw new Error(j.message||('HTTP '+r.status));return j;});})
+      .then(function(){
+        remember();form.reset();[fN,fE,fS].forEach(function(i){show(i,'');});formStart=0;
+        ok.hidden=false;ok.scrollIntoView({block:'nearest',behavior:'smooth'});
+      }).catch(function(x){
+        if(window.console)console.warn('Lead form:',x&&x.message);
+        fail.hidden=false;fail.scrollIntoView({block:'nearest',behavior:'smooth'});
+      }).then(function(){
+        btn.disabled=false;lbl.textContent='Send me the audit';
+        try{if(window.hcaptcha)window.hcaptcha.reset();}catch(_){}
+      });
+  });
+  document.getElementById('copyBtn').addEventListener('click',function(){
+    var b=this,code=document.getElementById('mailAddr');
+    function sel(){var r=document.createRange();r.selectNodeContents(code);var s=getSelection();s.removeAllRanges();s.addRange(r);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(TO).then(function(){b.textContent='Copied';},function(){sel();b.textContent='Selected';});}else{sel();b.textContent='Selected';}
+  });
+})();
+</script>
+<script src="https://web3forms.com/client/script.js" async defer></script>
+
+</body>
+</html>

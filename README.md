@@ -19,6 +19,9 @@ It is plain HTML, CSS and JavaScript in a single file. There is no build step, f
 | `apple-touch-icon.png` | iPhone / iPad home screen icon (180 px) |
 | `icon-192.png`, `icon-512.png` | Android home screen icons |
 | `site.webmanifest` | Tells phones the site's name, icons and colours |
+| `robots.txt` | Tells search engines and AI crawlers they may read the site |
+| `llms.txt` | A plain-text summary of the business, services and prices for AI assistants |
+| `_headers` | Caching rules Netlify applies to each file |
 | `README.md` | This file |
 
 Keep all files in the same folder. `index.html` links to the icons by file name.
@@ -83,6 +86,22 @@ Prices are in INR, excluding GST and ad spend. They are estimates of typical Ind
 
 To change a price, search `index.html` for the old amount (for example `₹34,999`) and replace it.
 
+## Search engines and AI assistants
+
+The page carries structured data (schema markup) in a `<script type="application/ld+json">` block in the `<head>`. It describes:
+
+- the business (`Organization` and `ProfessionalService`): name, description, email, logo and areas served
+- each of the eight services with its starting price in INR
+- the three monthly plans with their prices and what they include
+- the FAQ (`FAQPage`)
+- the website and page (`WebSite`, `WebPage`)
+
+**When you change a price, a plan or an FAQ answer, change it in three places:** the visible page, the schema block in `index.html`, and `llms.txt`. Search engines can penalise structured data that doesn't match the page.
+
+There are no reviews or star ratings in the schema on purpose. Add them only once there are real client reviews shown on the page.
+
+To check the markup after deploying, paste the live address into [Google's Rich Results Test](https://search.google.com/test/rich-results) and the [Schema Markup Validator](https://validator.schema.org).
+
 ## Lead form
 
 The form sends requests through **[Web3Forms](https://web3forms.com)**, a free form service. Requests arrive by email with the subject **"New Define room lead"**. Pressing reply in Gmail goes straight to the visitor.
@@ -132,3 +151,5 @@ To update the site later, drag the folder onto the same site's **Deploys** page 
 - [ ] **Review prices and terms.** Check the plan prices, single-service prices and the month-to-month, 30-day notice terms against how you actually work.
 - [ ] **Send one live test** from the hosted site and confirm it reaches Gmail.
 - [ ] Optional: connect a custom domain and set up Google Search Console and GA4 for the live site.
+- [ ] **After the domain is live:** add a canonical link, `og:url`, a 1200×630 share image (`og:image`), a `sitemap.xml` and the `Sitemap:` line in `robots.txt`, and make the schema URLs absolute.
+- [ ] **Add social profiles** (Instagram and others) to the schema's `sameAs` list so Google and AI assistants can link the brand to them.

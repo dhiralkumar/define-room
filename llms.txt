@@ -1,0 +1,49 @@
+# Define Room
+
+> Define Room is a digital marketing studio in India that works with clients in India and remotely worldwide. It runs SEO, social media content, video editing, graphic design, websites, tracking and AI automation workflows as one system, so small and growing businesses get more enquiries without hiring several freelancers. The main offer is a free website audit, delivered within 48 hours.
+
+Prices are in Indian rupees (INR) and exclude GST and ad spend. Clients outside India can get a quote in USD. Contact: dhiralkumar2002@gmail.com, or the free audit form on the website.
+
+## Services and starting prices
+
+- SEO: technical audit and fixes, local SEO, content. From ₹12,999 per month.
+- Social media content: viral-format reels, scripts and hooks, posting plan. From ₹17,999 per month.
+- Video editing: reels, shorts, YouTube, captions. From ₹1,499 per reel.
+- Graphic design: logo and brand kit, ad creatives, post templates. From ₹7,999.
+- Website design and build: landing pages and business sites on Webflow or WordPress. From ₹24,999.
+- AI automation workflows: n8n and Make workflows for lead routing, AI replies and reporting. From ₹9,999 per workflow.
+- Tracking and analytics: GA4, Google Tag Manager, Meta pixel. From ₹7,999.
+- Website audit: speed, SEO, tracking and conversion review. ₹4,999; the first audit is free.
+
+## Monthly plans
+
+Month to month, cancel with 30 days' notice.
+
+- Starter, ₹14,999 per month: 8 designed posts and 4 edited reels, Google Business Profile and on-page SEO basics, GA4 and Meta pixel setup, monthly one-page report.
+- Growth, ₹34,999 per month (most chosen): 12 viral-format reels with scripts and hooks and 8 posts, ongoing SEO with technical fixes and 2 blog articles, full tracking with Tag Manager and conversion events, 1 AI automation workflow, landing page updates and a quarterly website audit.
+- Scale, ₹69,999 per month: 20 reels and 12 posts with shoot direction, an SEO content cluster of 4 articles and link building, up to 3 maintained automation workflows, ongoing website design and development, weekly check-in and priority support.
+
+## How it works
+
+1. Free audit, within 48 hours: a short report on the website, Google presence and social channels with the biggest leaks.
+2. 30-day plan, in week 1: a call to agree goals, then a plan of what ships, when, and which number it should move.
+3. Ship and report, every month: content, pages and automations go live on schedule, with a plain-language report.
+
+## Proof
+
+- 1.8M+ Instagram views earned with organic reels made by Define Room.
+
+## FAQ
+
+- How long before I see results? Content and tracking improvements show within the first month. SEO usually takes three to six months to build steady traffic.
+- Is there a long contract? No. Plans are month to month with 30 days' notice, and clients keep everything created for them.
+- Is ad spend included? No. Ad budgets are paid directly to Meta or Google from the client's own account.
+- Do you work outside India? Yes, remotely with clients anywhere, with quotes in USD.
+
+## Links
+
+- [Website](index.html)
+- [Services](index.html#services)
+- [Pricing](index.html#pricing)
+- [FAQ](index.html#faq)
+- [Free website audit](index.html#audit)

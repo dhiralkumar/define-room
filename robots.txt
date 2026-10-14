@@ -1,0 +1,6 @@
+# Define Room: every search engine and AI assistant may read this site.
+User-agent: *
+Allow: /
+
+# Add this line once the site has its own domain:
+# Sitemap: https://YOUR-DOMAIN/sitemap.xml

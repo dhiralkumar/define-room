@@ -1,0 +1,14 @@
+# Netlify reads this file and sends these caching rules with each file.
+# The page is always checked for updates; icons and logos are cached for a week.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/*.png
+  Cache-Control: public, max-age=604800
+/*.svg
+  Cache-Control: public, max-age=604800
+/favicon.ico
+  Cache-Control: public, max-age=604800
+/llms.txt
+  Content-Type: text/plain; charset=utf-8

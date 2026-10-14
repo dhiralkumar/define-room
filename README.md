@@ -110,7 +110,8 @@ To check the markup after deploying, paste the live address into [Google's Rich 
 The page scores 100 in every Lighthouse category (Performance, Accessibility, Best Practices, SEO and Agentic Browsing) in a local mobile test. What keeps it there:
 
 - Fonts are self-hosted in `fonts/` and the main one is preloaded.
-- No third-party script loads until the visitor nears the form.
+- Google Tag Manager (container `GTM-PMZ77XJG`) is the only third-party script on first load. It sits at the top of `<head>` in `index.html` and `404.html`, with its noscript fallback right after `<body>`. Every tag added in GTM adds weight, so re-run PageSpeed after publishing new tags.
+- The "I am human" check doesn't load until the visitor nears the form.
 - The hero animation and sticky button use observers instead of measuring the page on every frame or scroll.
 - The form carries WebMCP `toolname` and `tooldescription` attributes, so AI agents in the browser know what it does.
 
@@ -124,7 +125,7 @@ The access key is set near the bottom of `index.html` in the line starting `var 
 
 ### Spam and bot protection
 
-- **hCaptcha.** An "I am human" check using Web3Forms' free-plan site key. It loads only when a visitor scrolls near the form or taps a "Free audit" button, so the first page load has no third-party scripts.
+- **hCaptcha.** An "I am human" check using Web3Forms' free-plan site key. It loads only when a visitor scrolls near the form or taps a "Free audit" button, so it doesn't slow down the first page load.
 - **Hidden trap fields.** Two invisible fields that people never see but bots tend to fill in.
 - **Speed check.** A submission within 4 seconds of the page loading is treated as a bot.
 - **Quiet blocking.** Bots caught by the trap fields or the speed check see a normal "thank you" but nothing is sent.

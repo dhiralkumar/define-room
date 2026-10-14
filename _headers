@@ -1,10 +1,11 @@
 # Cloudflare Pages and Netlify read this file and send these headers with each file.
 # The page is always checked for updates; fonts, icons and logos are cached.
+# No Cross-Origin-Opener-Policy: it cuts the link to windows that open the site,
+# which breaks Google Tag Manager's Preview (Tag Assistant). Removed with the owner's OK.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
-  Cross-Origin-Opener-Policy: same-origin
   Strict-Transport-Security: max-age=31536000
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 /

@@ -21,7 +21,10 @@ It is plain HTML, CSS and JavaScript in a single file. There is no build step, f
 | `site.webmanifest` | Tells phones the site's name, icons and colours |
 | `robots.txt` | Tells search engines and AI crawlers they may read the site |
 | `llms.txt` | A plain-text summary of the business, services and prices for AI assistants |
-| `_headers` | Caching rules Netlify applies to each file |
+| `_headers` | Caching and security headers that Cloudflare Pages (and Netlify) send with each file |
+| `404.html` | The "page not found" page. It also stops unknown addresses returning the home page |
+| `fonts/` | Urbanist and DM Mono, served from the site itself so text appears faster |
+| `google0823776612e692ea.html` | Google Search Console ownership check. Don't delete it |
 | `README.md` | This file |
 
 Keep all files in the same folder. `index.html` links to the icons by file name.
@@ -102,6 +105,17 @@ There are no reviews or star ratings in the schema on purpose. Add them only onc
 
 To check the markup after deploying, paste the live address into [Google's Rich Results Test](https://search.google.com/test/rich-results) and the [Schema Markup Validator](https://validator.schema.org).
 
+## Page speed and AI agents
+
+The page scores 100 in every Lighthouse category (Performance, Accessibility, Best Practices, SEO and Agentic Browsing) in a local mobile test. What keeps it there:
+
+- Fonts are self-hosted in `fonts/` and the main one is preloaded.
+- No third-party script loads until the visitor nears the form.
+- The hero animation and sticky button use observers instead of measuring the page on every frame or scroll.
+- The form carries WebMCP `toolname` and `tooldescription` attributes, so AI agents in the browser know what it does.
+
+Test with [PageSpeed Insights](https://pagespeed.web.dev) on mobile after each change.
+
 ## Lead form
 
 The form sends requests through **[Web3Forms](https://web3forms.com)**, a free form service. Requests arrive by email with the subject **"New Define room lead"**. Pressing reply in Gmail goes straight to the visitor.
@@ -110,7 +124,7 @@ The access key is set near the bottom of `index.html` in the line starting `var 
 
 ### Spam and bot protection
 
-- **hCaptcha.** An "I am human" check, loaded by the Web3Forms script.
+- **hCaptcha.** An "I am human" check using Web3Forms' free-plan site key. It loads only when a visitor scrolls near the form or taps a "Free audit" button, so the first page load has no third-party scripts.
 - **Hidden trap fields.** Two invisible fields that people never see but bots tend to fill in.
 - **Speed check.** A submission within 4 seconds of the page loading is treated as a bot.
 - **Quiet blocking.** Bots caught by the trap fields or the speed check see a normal "thank you" but nothing is sent.

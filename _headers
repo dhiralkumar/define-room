@@ -1,9 +1,18 @@
-# Netlify reads this file and sends these caching rules with each file.
-# The page is always checked for updates; icons and logos are cached for a week.
+# Cloudflare Pages and Netlify read this file and send these headers with each file.
+# The page is always checked for updates; fonts, icons and logos are cached.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
 /
   Cache-Control: public, max-age=0, must-revalidate
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
 /*.png
   Cache-Control: public, max-age=604800
 /*.svg
